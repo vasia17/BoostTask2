@@ -1,0 +1,70 @@
+apply plugin: 'com.android.application'
+
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+
+    defaultConfig {
+        applicationId "com.example.shon.test"
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    signingConfigs {
+        release {
+            storeFile file("release.jks")
+            storePassword "zaq12345"
+            keyAlias "vasia"
+            keyPassword "zaq12345"
+        }
+    }
+    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    Date date = new Date();
+
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    output.outputFile = new File(output.outputFile.parent,
+                            output.outputFile.name.replace("-release", "-" + "build" + "-" + dateFormat.format(date))
+                    )
+                }
+            }
+        }
+        debug {
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    output.outputFile = new File(output.outputFile.parent,
+                            output.outputFile.name.replace("-debug", "-" + dateFormat.format(date))
+                    )
+                }
+            }
+        }
+    }
+    productFlavors {
+        art {
+            applicationId "com.example.shon.test.art"
+            versionName "1.0-art"
+        }
+        vas {
+            applicationId "com.example.shon.test.vas"
+            versionName "1.0-vas"
+        }
+
+    }
+}
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    artCompile 'com.android.support:recyclerview-v7:23.0.+'
+}
+

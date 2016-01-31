@@ -5,6 +5,8 @@ import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static String[] catnames = new String[] { "Я", "Знаю", "Як", "Вивести", "Текст", "В", "List/RecyclerView"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

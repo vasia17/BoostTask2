@@ -24,7 +24,6 @@ public class ArtActivity extends MainActivity implements RecyclerViewAdapter.OnI
         myRecyclerView.setLayoutManager(linearLayoutManager);
 
         setContentView(myRecyclerView);
-        final String[] catnames = new String[] { "Я", "Знаю", "Як", "Вивести", "Текст", "В", "RecyclerView", "Через", "RecyclerViewAdapter"};
         int catnamesSize = catnames.length;
         int num = 0;
         while (num != catnamesSize) {
